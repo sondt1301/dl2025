@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{Labwork 2: Linear Regression}
+\author{Dang Thai Son}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Implementation}
+In order to implement a simple version of Linear Regression using Gradient Descend, three main functions are made: 
+
+\begin{itemize}
+    \item f() is the loss function defined as:
+    \[
+    f(w_0, w_1) = \frac{1}{2}(w_1 x + w_0 - y)^2
+    \]
+    \item The gradients (partial derivatives) used in the algorithm are f\_w0\_\_() and f\_w1\_\_() representing:
+    \[
+    \frac{\partial f}{\partial w_0} = w_1 x + w_0 - y
+    \]
+    \[
+    \frac{\partial f}{\partial w_1} = x(w_1 x + w_0 - y)
+    \]
+    \item A gradient descend loop gradient\_descend() was used to update $w_0$ and $w_1$ iteratively in order to reduce the value of loss function:
+    \[
+    w_0 = w_0 - r \cdot \frac{1}{n} \sum_{i=1}^{n} \frac{\partial f}{\partial w_0}
+    \]
+    \[
+    w_1 = w_1 - r \cdot \frac{1}{n} \sum_{i=1}^{n} \frac{\partial f}{\partial w_1}
+    \]
+\end{itemize}
+
+\section{Learning Rate Effect}
+In this specific problem, with initial values of w0=0 and w1=1:
+
+\begin{itemize}
+    \item \textbf{With learning rate equal to or less than 0.0001}: The loss function slowly converges around 9.45.
+    \item \textbf{With learning greater than 0.0001}: The loss function diverges with extremely large values.
+    \item \textbf{With learning equal to 0}: The value of the loss function does not change.
+\end{itemize}
+
+In summary, choosing a proper learning rate is crucial for balancing convergence speed and stability.
+
+\end{document}
