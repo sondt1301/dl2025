@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{graphicx}
+
+\title{Labwork 3: Logistic Regression}
+\author{Dang Thai Son}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Implementation}
+In order to implement a simple version of Logistic Regression using 3D Gradient Descend, four main functions are made: 
+
+\begin{itemize}
+    \item f() is the single loss function defined as:
+    \[
+    f(w_0, w_1, w_2) = -y_i \left(w_1 x_i^{(1)} + w_2 x_i^{(2)} + w_0\right) + \log \left(1 + e^{w_1 x_i^{(1)} + w_2 x_i^{(2)} + w_0}\right)
+    \]
+    \item sigmoid() is the sigmoid function (used to calculate single loss value) defined as:
+    \[
+    \sigma(z) = \frac{1}{1 + e^{-z}}
+    \]
+    \item The gradients (partial derivatives) used in the algorithm are f\_w0\_\_(), f\_w1\_\_(), and f\_w2\_\_() representing:
+    \[
+    \frac{\partial f}{\partial w_0} = 1 - y_i - \sigma\left(-\left(w_1 x_i^{(1)} + w_2 x_i^{(2)} + w_0\right)\right)
+    \]
+    \[
+    \frac{\partial f}{\partial w_1} = -y_i \, x_i^{(1)} + x_i^{(1)} \, \left[1 - \sigma\left(-\left(w_1 x_i^{(1)} + w_2 x_i^{(2)} + w_0\right)\right)\right]
+    \]
+    \[
+    \frac{\partial f}{\partial w_2} = -y_i \, x_i^{(2)} + x_i^{(2)} \, \left[1 - \sigma\left(-\left(w_1 x_i^{(1)} + w_2 x_i^{(2)} + w_0\right)\right)\right]
+    \]
+    \item A gradient descend loop gradient\_descend() was used to update $w_0$, $w_1$, and and $w_2$ iteratively in order to reduce the value of loss function:
+    \[
+    w_0 = w_0 - r \cdot \frac{1}{n} \sum_{i=1}^{n} \frac{\partial f}{\partial w_0}
+    \]
+    \[
+    w_1 = w_1 - r \cdot \frac{1}{n} \sum_{i=1}^{n} \frac{\partial f}{\partial w_1}
+    \]
+    \[
+    w_2 = w_2 - r \cdot \frac{1}{n} \sum_{i=1}^{n} \frac{\partial f}{\partial w_2}
+    \]
+\end{itemize}
+
+\section{Learning Rate Effect}
+In this specific problem, with initial values of w0=0, w1=1, and w2=2:
+
+\begin{itemize}
+    \item \textbf{With learning rate equal to or less than around 0.6}: The loss function converges around 0.198.
+    \item \textbf{With learning greater than 0.6}: The loss function diverges.
+    \item \textbf{With learning equal to 0}: The value of the loss function does not change.
+\end{itemize}
+
+In summary, choosing a proper learning rate is crucial for balancing convergence speed and stability.
+
+\end{document}

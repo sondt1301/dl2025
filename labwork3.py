@@ -23,8 +23,8 @@ for row in data:
 
 # Algorithm implementation
 # LOSS FUNCTION
-def f(w0, w2, w1, x1, x2, y):
-    loss = -y * (w1*x1 + w2*x2 + w0) + math.log10(1 + math.exp(w1*x1 + w2*x2 + w0))
+def f(w0, w1, w2, x1, x2, y):
+    loss = -y * (w1*x1 + w2*x2 + w0) + math.log(1 + math.exp(w1*x1 + w2*x2 + w0))
     return loss
 
 # SIGMOID FUNCTION
@@ -36,11 +36,11 @@ def f_w0__(w0, w1, w2, x1, x2, y):
     return derivative
 
 def f_w1__(w0, w1, w2, x1, x2, y):
-    derivative = -y*x1 - x1*(1 - sigmoid(-(w1*x1 + w2*x2 + w0)))
+    derivative = -y*x1 + x1*(1 - sigmoid(-(w1*x1 + w2*x2 + w0)))
     return derivative
 
 def f_w2__(w0, w1, w2, x1, x2, y):
-    derivative = -y*x2 - x2*(1 - sigmoid(-(w1*x1 + w2*x2 + w0)))
+    derivative = -y*x2 + x2*(1 - sigmoid(-(w1*x1 + w2*x2 + w0)))
     return derivative
 
 def gradient_descend(r, w0, w1, w2, x1_data, x2_data, y_data, threshold):
@@ -64,4 +64,4 @@ def gradient_descend(r, w0, w1, w2, x1_data, x2_data, y_data, threshold):
             w2 = new_w2
 
 if __name__ == "__main__":
-    gradient_descend(r=0.0001, w0=0, w1=1, w2=2, x1_data=x1_data, x2_data=x2_data, y_data=y_data, threshold=-100)
+    gradient_descend(r=0.01, w0=0, w1=1, w2=2, x1_data=x1_data, x2_data=x2_data, y_data=y_data, threshold=0.1)
