@@ -12,7 +12,6 @@ def read_data(file_path):
         data.append(line.strip() if line.strip().isdigit() else ast.literal_eval(line.strip()))
 
     num_layers = int(data[0])
-    print(data[1])
     num_neurons = [data[i] for i in range(1, num_layers + 1)]
     weight = data[num_layers + 1]
     bias_weight = data[num_layers + 2]
@@ -26,37 +25,37 @@ def check_fix_weight(file_path, input):
 
     output = network.get_result()
     print("================ RESULT WITH FIXED WEIGHT =================")
+    print(f"Network output: {output} with input {input}")
     print("=================================")
-    print(f"Network output: {output}")
 
-# def check_random_weight(file_path, input):
-#     num_layers, num_neurons, _, _ = read_data(file_path)
-#     weight = []
-#     bias_weight = []
-#     for i in range(num_layers-1):
-#         neuron_weight = []
-#         layer_weight = []
-#         for i in range(int(num_neurons[i+1])):
-#             neuron_weight.append(random.uniform(0, 1))
-#             print('aaa', i)
-#             layer_weight.append(neuron_weight)
-#         weight.append(layer_weight)
-#         bias_weight.append(random.uniform(0, 1))
-#     print('weight', weight)
-#     print('bias_weight', weight)
-#     network = Network(weight, bias_weight, input)
-#
-#     output = network.get_result()
-#     print("================ RESULT WITH RANDOM WEIGHT =================")
-#     print("=================================")
-#     print(f"Network output: {output}")
+def check_random_weight(file_path, input):
+    num_layers, num_neurons, _, _ = read_data(file_path)
+    weight = []
+    bias_weight = []
+    for i in range(num_layers-1):
+        neuron_weight = []
+        layer_weight = []
+        layer_bias_weight = []
+        for j in range(int(num_neurons[i+1])):
+            neuron_weight.append(random.uniform(0, 1))
+            layer_weight.append(neuron_weight)
+
+            layer_bias_weight.append(random.uniform(0, 1))
+
+        weight.append(layer_weight)
+        bias_weight.append(layer_bias_weight)
+
+    network = Network(weight, bias_weight, input)
+
+    output = network.get_result()
+    print("================ RESULT WITH RANDOM WEIGHT =================")
+    print(f"Network output: {output} with input {input}")
+    print("=================================")
 
 
 if __name__ == '__main__':
     file_path = "./input.txt"
-    input = [1, 1]
-    check_fix_weight(file_path, input)
-    # check_random_weight(file_path, input)
-
-
-
+    input = [[0, 0], [0, 1], [1, 0],[1, 1]]
+    for item in input:
+        check_fix_weight(file_path, item)
+        # check_random_weight(file_path, item)
