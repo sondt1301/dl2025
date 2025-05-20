@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage{multirow}
+\usepackage{graphicx}
+
+\title{Labwork 4: Neural Network}
+\author{Dang Thai Son}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Network Architecture}
+Using proper object-oriented concepts, the network has three classes representing its three main components: 
+
+\begin{itemize}
+    \item Neuron class: represents a node in the network. This class has information about weights and inputs which are used to calculate the linear sum and sigmoid value for the node in the next layer.
+    \item Layer class: represents a layer in the network. This class defines the number of neurons in each layer and forms a matrix of nx1 neurons based on weights and inputs.
+    \item Network class: represents the whole neural network. This class defines the number of layers in the network and applies the feedforward technique to obtain the output of the network.
+\end{itemize}
+
+The feedforward algorithm is implemented in the Network class where it uses neurons in the previous layer to calculate those in the next layer using the activation function:
+\[
+\hat{y} = \sigma\left(-\left(w_1 x_i^{(1)} + w_2 x_i^{(2)} + w_0\right)\right)
+\]
+
+\section{Experiment with the XOR network}
+
+\begin{itemize}
+    \item With the following fixed weight:
+        \begin{center}
+            \begin{tabular}{ |c|c|c|c| } 
+                \hline
+                Layer & x1 & x2 & bias \\
+                \hline
+                \multirow{2}{4em}{Layer 1} & -1 & -1 & 1.5 \\ 
+                & 1 & 1 & -0.5 \\ 
+                \hline
+                \hline
+                \multirow{1}{4em}{Layer 2} & 1 & 1 & -1.5 \\ 
+                \hline
+            \end{tabular}
+        \end{center}
+    the result (which is correct) is:
+        \begin{center}
+            \begin{tabular}{ |c|c|c| } 
+                \hline
+                x1 & x2 & y \\
+                \hline
+                0 & 0 & 0 \\ 
+                0 & 1 & 1 \\ 
+                1 & 0 & 1 \\ 
+                1 & 1 & 0 \\ 
+                \hline
+            \end{tabular}
+        \end{center}
+    
+    \item With random weight:
+        \begin{center}
+            \begin{tabular}{ |c|c|c|c| } 
+                \hline
+                Layer & x1 & x2 & bias \\
+                \hline
+                \multirow{2}{4em}{Layer 1} & 0.64 & 0.28 & 0.03 \\ 
+                & 0.33 & 0.46 & 0.06 \\ 
+                \hline
+                \hline
+                \multirow{1}{4em}{Layer 2} & 0.52 & 0.91 & 0.09 \\ 
+                \hline
+            \end{tabular}
+        \end{center}
+    the result (which is not correct and need further update) is:
+        \begin{center}
+            \begin{tabular}{ |c|c|c| } 
+                \hline
+                x1 & x2 & y \\
+                \hline
+                0 & 0 & 1 \\ 
+                0 & 1 & 1 \\ 
+                1 & 0 & 1 \\ 
+                1 & 1 & 1 \\ 
+                \hline
+            \end{tabular}
+        \end{center}
+\end{itemize}
+\end{document}
