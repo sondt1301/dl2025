@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Labwork 5: Back propagation}
+\author{Dang Thai Son}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Network Architecture}
+Using proper object-oriented concepts, the network has three classes representing its three main components: 
+
+\begin{itemize}
+    \item Neuron class: represents a node in the network. This class has information about weights and inputs which are used to calculate the linear sum and sigmoid value for the node in the next layer.
+    \item Layer class: represents a layer in the network. This class defines the number of neurons in each layer and forms a matrix of nx1 neurons based on weights and inputs.
+    \item Network class: represents the whole neural network. This class defines the number of layers in the network and applies the feedforward technique to obtain the output of the network.
+\end{itemize}
+
+The feedforward algorithm is implemented in the Network class where it uses neurons in the previous layer to calculate those in the next layer using the activation function:
+\[
+\hat{y} = \sigma\left(-\left(w_1 x_i^{(1)} + w_2 x_i^{(2)} + w_0\right)\right)
+\]
+
+After the feedforward, the output of the error is calculated by:
+\[
+Error = y_{target} - y_{predicted}
+\]
+
+Then, the change in each weight is calculated as:
+\[
+\Delta w_{ij} = RearningRate \times error_j \times output_j
+\]
+
+Subsequently, the unit error of the output and the hidden layer is calculated by:
+\[
+\delta_{output} = y_{predicted} (1 - y_{predicted})(y_{\text{target}} - y_{predicted})
+\]
+\[
+\delta_{hidden} = y_{predicted} (1 - y_{predicted})(w \cdot \delta_{output})
+\]
+
+And finally, the weight is updated
+
+\section{Experiment}
+Testing with the XOR problem, the accuracy varies from 50\% to 75\% while this is about 84\% in the house-price problem.
+\end{document}
