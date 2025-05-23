@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\title{Labwork 6: CNN}
+\author{Dang Thai Son}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Network Architecture}
+
+The VGG19 model comprises two main sequential modules:
+
+\begin{enumerate}
+    \item \textbf{Feature Extractor ($f_{\text{features}}$)}:
+    processes an input image to extract hierarchical features:
+    \begin{itemize}
+        \item Multiple Convolutional layers: Each layer applies $N_k$ filters of size $3 \times 3$:
+        \[ Y_{conv} = \text{ReLU}(W * X' + b) \]
+        where $X'$ is the input feature map to the layer, $W$ are filter weights, $b$ is the bias.
+        \item Max Pooling layers (`M`): A $2 \times 2$ max-pooling operation.
+    \end{itemize}
+
+    \item \textbf{Classifier ($f_{\text{classifier}}$)}:
+    The output $X_{feat}$ from the feature extractor is first flattened into a vector $X_{flat} = \text{Flatten}(X_{feat})$. This vector is then processed by a sequence of fully connected layers:
+    \begin{itemize}
+        \item Hidden layers:
+        \[ Y_{fc} = \text{ReLU}(W_{fc} X_{flat}' + b_{fc}) \]
+        where $X_{flat}'$ is the input vector to the layer.
+        \item Output layer: A final fully connected layer with $N_{\text{classes}}$ units producing the raw output scores $Z_{out}$:
+        \[ Z_{out} = W_{out} X_{hidden} + b_{out} \]
+    \end{itemize}
+    The overall classification is $Z_{out} = f_{\text{classifier}}(X_{flat})$.
+\end{enumerate}
+
+\end{document}
